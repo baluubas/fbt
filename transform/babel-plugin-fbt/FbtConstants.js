@@ -110,7 +110,7 @@ const ModuleNameRegExp = new RegExp(
   `\\b(?:${Object.values(JSModuleName).join('|')})\\b`,
 );
 
-const FBT_ENUM_MODULE_SUFFIX = '$FbtEnum';
+const FBT_ENUM_MODULE_SUFFIX = 'Enum';
 
 module.exports = {
   FBT_ENUM_MODULE_SUFFIX,

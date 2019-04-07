@@ -156,7 +156,7 @@ const call = function(t, moduleName) {
           });
           runtimeRange = t.objectExpression(rangeProps);
         } else if (t.isIdentifier(rangeArg)) {
-          const enumModule = fspath.parse(fbtEnumRequireMap[rangeArg.name]).name;
+          const enumModule = fspath.parse(FbtEnumRegistrar.getModuleName(rangeArg.name)).name;
           const manifest = enumManifest[enumModule];
           rangeProps = Object.keys(manifest).map(key => {
             return t.objectProperty(
