@@ -21,7 +21,7 @@
 
 /* eslint fb-www/comma-dangle: "off" */
 // See explanation in /js/fb-transforms/babel-7/babel-plugin-fbt/index.js
-
+const fspath = require('path');
 const {
   ValidPluralOptions,
   ValidPronounOptions,
@@ -156,7 +156,7 @@ const call = function(t, moduleName) {
           });
           runtimeRange = t.objectExpression(rangeProps);
         } else if (t.isIdentifier(rangeArg)) {
-          const enumModule = FbtEnumRegistrar.getModuleName(rangeArg.name);
+          const enumModule = fspath.parse(fbtEnumRequireMap[rangeArg.name]).name;
           const manifest = enumManifest[enumModule];
           rangeProps = Object.keys(manifest).map(key => {
             return t.objectProperty(

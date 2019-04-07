@@ -54,6 +54,7 @@ if (argv.help) {
 // Register babel-plugins with node to enable parsing flow types, etc.
 require('@babel/register')({
   plugins: [
+    '@babel/plugin-transform-typescript',
     '@babel/plugin-syntax-object-rest-spread',
     '@babel/plugin-transform-flow-strip-types',
   ],
@@ -62,14 +63,15 @@ require('@babel/register')({
 // Find enum files
 const enumFiles = shell
   .find(argv.src)
-  .filter(path => /\$FbtEnum\.js/i.test(path));
+  .filter(path => /Enum\.(ts|tsx|js)/i.test(path));
 
 // Write enum manfiest
 const enumManifest = {};
 for (const filepath of enumFiles) {
   // Infer module name from filename.
   const name = path.parse(filepath).name;
-  enumManifest[name] = require(path.resolve(filepath));
+  const enumFileContent =  require(path.resolve(filepath));
+  enumManifest[name] = enumFileContent.default || enumFileContent;
 }
 fs.writeFileSync(argv['enum-manifest'], JSON.stringify(enumManifest));
 
