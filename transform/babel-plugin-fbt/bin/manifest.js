@@ -58,6 +58,8 @@ require('@babel/register')({
     '@babel/plugin-syntax-object-rest-spread',
     '@babel/plugin-transform-flow-strip-types',
   ],
+
+  extensions: ['.js', '.jsx', '.ts', '.tsx']
 });
 
 // Find enum files
